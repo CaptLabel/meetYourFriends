@@ -52,7 +52,6 @@ class DefaultController extends Controller
         /** @var UserRepository $repository_user */
         $repository_user = $this->getDoctrine()->getManager()->getRepository('CommonBundle:User');
         $user = $repository_user->findOneBy(array('key_secure' => $keysecure));
-        //TODO FUNCTION OBJET POST OK
         if(!empty($user) && !empty($_POST)){
             $date_arr = $_POST['date_arr'];
             $date_dep = $_POST['date_dep'];
@@ -89,7 +88,6 @@ class DefaultController extends Controller
         $ret['status'] = "KO";
         $repository = $this->getDoctrine()->getManager()->getRepository('CommonBundle:User');
         $user = $repository->findOneBy(array('key_secure' => $keysecure));
-        //TODO FUNCTION OBJET POST OK
         if(!empty($user) && !empty($id)){
             $repository_stay = $this->getDoctrine()->getManager()->getRepository('CommonBundle:Stay');
             $stay = $repository_stay->myFindStayById($keysecure, $id);

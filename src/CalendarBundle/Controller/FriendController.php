@@ -10,7 +10,6 @@ class FriendController extends Controller
 {
     public function indexAction($keysecure)
     {
-        //todo creation method
         $repository = $this->getDoctrine()->getManager()->getRepository('CommonBundle:User');
         $user = $repository->findOneBy(array('key_secure' => $keysecure));
         if(empty($user)){
@@ -26,7 +25,6 @@ class FriendController extends Controller
     public function searchAction($keysecure, $val)
     {
         $ret['status'] = "KO";
-        //todo creation method
         $repository = $this->getDoctrine()->getManager()->getRepository('CommonBundle:User');
         $user = $repository->findOneBy(array('key_secure' => $keysecure));
         if(empty($user)){
@@ -44,7 +42,6 @@ class FriendController extends Controller
     public function addAction($keysecure, $id)
     {
         $ret['status'] = "KO";
-        //todo creation method
         $repository = $this->getDoctrine()->getManager()->getRepository('CommonBundle:User');
 
         /** @var User $user */
@@ -52,23 +49,15 @@ class FriendController extends Controller
         if(empty($user)){
             return new Response("Invalid");
         }
-
-
         $new_friend = $repository->findOneBy(array('id' => $id));
         if(empty($new_friend)){
             return new Response("Invalid");
         }
-
         $em = $this->getDoctrine()->getManager();
         $user->addFriend($new_friend);
-
         $em->persist($user);
         $em->flush();
-
-
         $ret['status'] = "OK";
-
-
         $response = new Response(json_encode($ret));
         $response->headers->set('Content-Type', 'application/json');
         return $response;
@@ -76,31 +65,21 @@ class FriendController extends Controller
     public function deleteAction($keysecure, $id)
     {
         $ret['status'] = "KO";
-        //todo creation method
         $repository = $this->getDoctrine()->getManager()->getRepository('CommonBundle:User');
-
         /** @var User $user */
         $user = $repository->findOneBy(array('key_secure' => $keysecure));
         if(empty($user)){
             return new Response("Invalid");
         }
-
-
         $new_friend = $repository->findOneBy(array('id' => $id));
         if(empty($new_friend)){
             return new Response("Invalid");
         }
-
         $em = $this->getDoctrine()->getManager();
         $user->removeFriend($new_friend);
-
         $em->persist($user);
         $em->flush();
-
-
         $ret['status'] = "OK";
-
-
         $response = new Response(json_encode($ret));
         $response->headers->set('Content-Type', 'application/json');
         return $response;
