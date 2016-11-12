@@ -31,8 +31,6 @@ var label_month = {
 
 getStay();
 
-//todo confirmation suppresio
-
 function initSlide(current_slide){
     var y = current_slide.getFullYear();
     var m = current_slide.getMonth();
@@ -180,7 +178,6 @@ function removeStay(id){
         method: 'POST',
         dataType: 'json',
         success : function(){
-            //TODO SUCCESS REMOVE
             $('#delete_popup').modal('hide');
             getStay();
         }
