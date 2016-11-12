@@ -1,0 +1,43 @@
+calendar_homepage:
+    path:     /
+    defaults: { _controller: CalendarBundle:Form:index }
+
+calendar_register:
+    path:     /register
+    defaults: { _controller: CalendarBundle:Form:registrer }
+
+calendar_display:
+    path:     /display/{keysecure}
+    defaults: { _controller: CalendarBundle:Default:index }
+
+calendar_friend_index:
+    path:     /friend/{keysecure}
+    defaults: { _controller: CalendarBundle:Friend:index }
+
+calendar_friend_search:
+    path:     /searchfriend/{keysecure}/{val}
+    defaults: { _controller: CalendarBundle:Friend:search }
+
+calendar_friend_add:
+    path:     /addfriend/{keysecure}/{id}
+    defaults: { _controller: CalendarBundle:Friend:add }
+
+calendar_friend_delete:
+    path:     /deletefriend/{keysecure}/{id}
+    defaults: { _controller: CalendarBundle:Friend:delete }
+
+calendar_add_stay:
+    path:     /addfriend/{keysecure}
+    defaults: { _controller: CalendarBundle:Default:index }
+
+calendar_get_stay:
+    path:     /getstay/{keysecure}
+    defaults: { _controller: CalendarBundle:Default:getStay }
+
+calendar_modify_stay:
+    path:     /modifystay/{keysecure}/{id}
+    defaults: { _controller: CalendarBundle:Default:modifyStay }
+
+calendar_remove_stay:
+    path:     /removestay/{keysecure}/{id}
+    defaults: { _controller: CalendarBundle:Default:removeStay }

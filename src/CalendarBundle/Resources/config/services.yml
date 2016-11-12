@@ -1,0 +1,4 @@
+services:
+    calendar.get_stay:
+        class: CalendarBundle\Service\Service
+

@@ -1,0 +1,84 @@
+#main_calendar {
+    width: 100%;
+    color: #BCBCBC;
+    height: 350px;
+}
+
+#main_calendar.loading{
+    background: rgba(0, 0, 0, 0) url("../images/loading.gif") no-repeat scroll center center;
+    background-size: 160px 120px;
+}
+
+#main_calendar.loading th{
+    display: none;
+}
+
+#main_calendar td, #main_calendar th {
+    text-align: center;
+}
+
+.ds {
+    color: #000000;
+}
+
+.dm{
+    color: red;
+}
+
+#stay_popup{
+
+}
+
+.ui_change_month{
+    font-size: 24px;
+}
+
+.btn_menu{
+    color: #000;
+    font-size: 24px;
+    margin-top: 15px;
+    border: 1px solid #efefef
+}
+
+.nav .btn_menu:hover{
+    background: none;
+}
+
+.btn_add_friend{
+    font-size: 24px;
+}
+
+.btn_add_friend:hover{
+    text-decoration: none;
+}
+
+.btn_return_calen{
+    font-size: 24px;
+}
+
+.btn_return_calen:hover{
+    text-decoration: none;
+}
+
+.c-pointer{
+    cursor: pointer;
+}
+
+#block_schedule .match td{
+    color: red;
+    border-bottom: 1px solid red;
+}
+
+#block_schedule .td-center{
+    text-align: center;
+}
+#block_schedule .match-name{
+    padding-left: 50px;
+}
+#block_schedule .match-line td{
+    border-bottom: 1px solid red;
+}
+
+#match_list{
+    width: 100%;
+}
