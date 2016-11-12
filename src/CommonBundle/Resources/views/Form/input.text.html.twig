@@ -1,0 +1,9 @@
+{% block input_text_widget %}
+    {% spaceless %}
+        <div class="form-group">
+            qzdzq
+            {{ form_label(child) }}
+            {{ block('input_text_widget') }}
+        </div>
+    {% endspaceless %}
+{% endblock %}

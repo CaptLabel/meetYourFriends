@@ -1,0 +1,21 @@
+{% extends 'CalendarBundle::layout.html.twig' %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <form name="user" method="post">
+                <div class="form-group">
+                    {{ form_row(form.email) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.password) }}
+                </div>
+                {{ form_widget(form.submit) }}
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <a href="{{ path('calendar_register') }}">registrer</a>
+        </div>
+    </div>
+{% endblock %}

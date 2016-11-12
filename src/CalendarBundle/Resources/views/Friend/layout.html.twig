@@ -1,0 +1,32 @@
+{% extends 'CalendarBundle::layout.html.twig' %}
+{% block body %}
+    <div class="row">
+        <a href="{{ path('calendar_display', {'keysecure': user.keySecure}) }}" class="btn_return_calen"><i class="glyphicon glyphicon-calendar"></i></a>
+    </div>
+    {% include '@Calendar/Component/add.friends.html.twig' %}
+    <div class="row">
+        <table class="table">
+            {% if friend_list is empty %}
+                <tr>
+                    <td>You haven't friend yet</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <th>Name</th>
+                    <th colspan="2">Email</th>
+                </tr>
+            {% endif %}
+            {% for item in friend_list %}
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.email }}</td>
+                    <td><i class='glyphicon glyphicon-trash c-pointer' onclick="delete_friend(this, {{ item.id }})"></i></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <input id="key_secure" type="hidden" value="{{ user.getKeySecure }}"/>
+{% endblock %}
+{% block footer %}
+<script type="application/javascript" src="{{ asset('js/friends.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Meet Your Friends</title>
+    <link href="{{ asset('css/lib/bootstrap.min.css') }}" type="text/css" rel="stylesheet"/>
+    <link href="{{ asset('css/lib/bootstrap-theme.min.css') }}" type="text/css" rel="stylesheet"/>
+    <link href="{{ asset('css/styles.css') }}" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <h1 class="col-xs-10">Meet Your Friends !</h1>
+        <ul class="nav nav-pills col-xs-2">
+            <li role="presentation" class="dropdown">
+                <a class="dropdown-toggle btn_menu" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="glyphicon glyphicon-menu-hamburger"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="{{ path('calendar_homepage') }}">Deconnexion</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            {% block body %}{% endblock %}
+        </div>
+    </div>
+</div>
+<script type="application/javascript" src="{{ asset('js/lib/jquery3.1.1.js') }}"></script>
+<script type="application/javascript" src="{{ asset('js/lib/bootstrap.min.js') }}"></script>
+<script type="application/javascript" src="{{ asset('js/funct.js') }}"></script>
+{% block footer %}{% endblock %}
+</body>
+</html>

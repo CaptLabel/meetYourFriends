@@ -1,0 +1,33 @@
+{% extends 'CalendarBundle::layout.html.twig' %}
+{% block body %}
+    <div class="row">
+        <div id="current_month" class="col-xs-8">
+
+        </div>
+        <div class="col-xs-2">
+            <div class="ui_change_month glyphicon glyphicon-chevron-up c-pointer" ui-action="next"></div>
+            <div class="ui_change_month glyphicon glyphicon-chevron-down c-pointer" ui-action="prev"></div>
+        </div>
+        <div class="col-xs-2">
+            <a href="{{ path('calendar_friend_index', {'keysecure': user.getKeySecure }) }}" class="btn_add_friend"><i class="glyphicon glyphicon-user"></i></a>
+        </div>
+    </div>
+    <table id="main_calendar">
+        <tr>
+            <th>Mo</th><th>Tu</th><th>We</th><th>Th</th><th>Fri</th><th>Sa</th><th>Su</th>
+        </tr>
+    </table>
+    <div class="row">
+        <div class="col-md-12">
+            <div id="add_stay" class="glyphicon glyphicon-plus c-pointer" data-toggle="modal" data-target="#stay_popup"></div>
+        </div>
+    </div>
+    <table id="block_schedule" class="table"><tbody></tbody></table>
+    {% include '@Calendar/Form/stay.html.twig' %}
+    {% include '@Calendar/Popup/delete.html.twig' %}
+    {% include '@Calendar/Popup/match.html.twig' %}
+    <input id="key_secure" type="hidden" value="{{ user.getKeySecure }}"/>
+{% endblock %}
+{% block footer %}
+    <script type="application/javascript" src="{{ asset('js/main.js') }}"></script>
+{% endblock %}
