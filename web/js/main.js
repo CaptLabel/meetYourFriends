@@ -58,6 +58,7 @@ function initStay(current_slide){
     }
 }
 
+//TODO delete ?
 function initMatch(current_slide){
     for(var key in myMatch){
         if(myMatch.hasOwnProperty(key)){
@@ -241,6 +242,17 @@ function fromPickerToSelect(date, target){
     });
 }
 
+function initMinDate(){
+
+
+
+    //console.log(strToDate());
+
+    console.log($('#stay_dateArrival_picker').val());
+
+    return init_date;
+}
+
 $(document).ready(function(){
     $('.ui_change_month').click(function(){
         var ui_action = $(this).attr('ui-action');
@@ -285,7 +297,6 @@ $(document).ready(function(){
                             (($(this).attr('id').indexOf('Arrival') != '-1')?dS = date_arr:dS = date_dep);
                             var key = $(this).attr('id').split('_');
                             var obj_date = getDateObject(dS);
-                            console.log(obj_date);
                             $(this).val(obj_date[key[2]]);
                         });
                     }
@@ -302,6 +313,11 @@ $(document).ready(function(){
         minDate : init_date,
         onSelect : function(){
             fromPickerToSelect($(this).val(), $(this).attr('ui-select-target'));
+        },
+        beforeShow: function(){
+            if($(this).attr('ui-select-target') == "stay_dateDeparture"){
+                $(this).datepicker('option', 'minDate', $('#stay_dateArrival_picker').datepicker('getDate'))
+            }
         }
     });
 });
