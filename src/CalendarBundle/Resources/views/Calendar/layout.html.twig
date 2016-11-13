@@ -23,11 +23,12 @@
         </div>
     </div>
     <table id="block_schedule" class="table"><tbody></tbody></table>
-    {% include '@Calendar/Form/stay.html.twig' %}
+    {% include '@Calendar/Popup/stay.html.twig' %}
     {% include '@Calendar/Popup/delete.html.twig' %}
     {% include '@Calendar/Popup/match.html.twig' %}
     <input id="key_secure" type="hidden" value="{{ user.getKeySecure }}"/>
 {% endblock %}
 {% block footer %}
+    <script type="application/javascript" src="{{ asset('js/lib/jquery-ui.js') }}"></script>
     <script type="application/javascript" src="{{ asset('js/main.js') }}"></script>
 {% endblock %}

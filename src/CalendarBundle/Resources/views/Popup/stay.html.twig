@@ -7,9 +7,18 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
+                    <label class="required" for="stay_dateArrival_picker">Date arrival</label>
+                    <input id="stay_dateArrival_picker" type="text" class="form-control picker-init" ui-select-target="stay_dateArrival"/>
+                </div>
+                <div class="">
+                    <label class="required">Date departure</label>
                     {{ form_row(form.dateArrival) }}
                 </div>
                 <div class="form-group">
+                    <label class="required" for="stay_dateDeparture_picker">Date departure</label>
+                    <input id="stay_dateDeparture_picker" type="text" class="form-control picker-init" ui-select-target="stay_dateDeparture"/>
+                </div>
+                <div class="">
                     {{ form_row(form.dateDeparture) }}
                 </div>
                 <div class="form-group">

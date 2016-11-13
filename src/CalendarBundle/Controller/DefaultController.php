@@ -8,15 +8,17 @@ use CommonBundle\Repository\StayRepository;
 use CommonBundle\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class DefaultController extends Controller
 {
     public function indexAction($keysecure)
     {
+        $session = new Session();
         $repository = $this->getDoctrine()->getManager()->getRepository('CommonBundle:User');
         $ret = $repository->findBy(array('key_secure' => $keysecure));
-        if(count($ret) != 1){
-            return new Response("Invalid");
+        if(count($ret) != 1 || $keysecure != $session->get('ks')){
+            return $this->redirect($this->generateUrl('calendar_homepage'));
         }
         $stay = new Stay();
         $form = $this->createForm(new StayType(), $stay);

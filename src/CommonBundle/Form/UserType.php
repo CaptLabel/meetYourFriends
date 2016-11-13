@@ -37,7 +37,7 @@ class UserType extends AbstractType
             )
             ->add(
                 'password',
-                'text',
+                'password',
                 array(
                     'label' => 'Password',
                     'attr' => array(

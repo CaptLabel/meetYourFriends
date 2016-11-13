@@ -15,8 +15,25 @@ class StayType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('dateArrival', 'date')
-            ->add('dateDeparture', 'date')
+            ->add('dateArrival',
+                'date',
+                array(
+                    'format' => 'dMy',
+                    'attr' => array(
+                        'class' => 'selectDate'
+                    )
+                )
+
+            )
+            ->add('dateDeparture',
+                'date',
+                array(
+                    'format' => 'dMy',
+                    'attr' => array(
+                        'class' => 'selectDate'
+                    )
+                )
+            )
             ->add(
                 'city',
                 'choice',

@@ -234,6 +234,13 @@ function fillMatchList(list){
     match_list.html(html);
 }
 
+function fromPickerToSelect(date, target){
+    var date_s = date.split('/');
+    $('#'+target).find('select').each(function(idx){
+        $(this).val(parseFloat(date_s[idx]));
+    });
+}
+
 $(document).ready(function(){
     $('.ui_change_month').click(function(){
         var ui_action = $(this).attr('ui-action');
@@ -250,12 +257,14 @@ $(document).ready(function(){
             $('.ui_add_evt').show();
             $('.ui_mod_evt').hide();
             $('#stay_city').val('');
-            $('#stay_dateArrival_month').val(current_date.getMonth()+1);
-            $('#stay_dateArrival_day').val(current_date.getDate());
-            $('#stay_dateArrival_year').val(current_date.getFullYear());
-            $('#stay_dateDeparture_day').val(current_date.getDate());
-            $('#stay_dateDeparture_month').val(current_date.getMonth()+1);
-            $('#stay_dateDeparture_year').val(current_date.getFullYear());
+            $('.picker-init').each(function(){
+                $(this).val(convertDate(current_date));
+            });
+            $('.selectDate').find('select').each(function(){
+                var key = $(this).attr('id').split('_');
+                var obj_date = getDateObject(convertDate(current_date, "Y-m-d"));
+                $(this).val(obj_date[key[2]]);
+            });
         }else{
             $('.ui_add_evt').hide();
             $('.ui_mod_evt').show();
@@ -263,15 +272,22 @@ $(document).ready(function(){
             for(var key in myStay){
                 if(myStay.hasOwnProperty(key)){
                     if(myStay[key].id == this_id){
-                        var date_arr = getDateObject(myStay[key].dateArrival.date);
-                        var date_dep = getDateObject(myStay[key].dateDeparture.date);
+                        var date_arr = myStay[key].dateArrival.date;
+                        var date_dep = myStay[key].dateDeparture.date;
                         $('#stay_city').val(myStay[key].city);
-                        $('#stay_dateArrival_month').val(date_arr.month);
-                        $('#stay_dateArrival_day').val(date_arr.day);
-                        $('#stay_dateArrival_year').val(date_arr.year);
-                        $('#stay_dateDeparture_day').val(date_dep.day);
-                        $('#stay_dateDeparture_month').val(date_dep.month);
-                        $('#stay_dateDeparture_year').val(date_dep.year);
+                        $('.picker-init').each(function(){
+                            var dS;
+                            (($(this).attr('id').indexOf('Arrival') != '-1')?dS = date_arr:dS = date_dep);
+                            $(this).val(strDateClean(dS));
+                        });
+                        $('.selectDate').find('select').each(function(){
+                            var dS;
+                            (($(this).attr('id').indexOf('Arrival') != '-1')?dS = date_arr:dS = date_dep);
+                            var key = $(this).attr('id').split('_');
+                            var obj_date = getDateObject(dS);
+                            console.log(obj_date);
+                            $(this).val(obj_date[key[2]]);
+                        });
                     }
                 }
             }
@@ -279,5 +295,13 @@ $(document).ready(function(){
     });
     $('.delete_stay').click(function(){
         removeStay($(this).attr('ui-id-d'));
+    });
+
+    $(".picker-init").datepicker({
+        dateFormat: 'dd/mm/yy',
+        minDate : init_date,
+        onSelect : function(){
+            fromPickerToSelect($(this).val(), $(this).attr('ui-select-target'));
+        }
     });
 });

@@ -5,6 +5,7 @@ namespace CalendarBundle\Controller;
 use CommonBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class FriendController extends Controller
 {
@@ -12,8 +13,9 @@ class FriendController extends Controller
     {
         $repository = $this->getDoctrine()->getManager()->getRepository('CommonBundle:User');
         $user = $repository->findOneBy(array('key_secure' => $keysecure));
-        if(empty($user)){
-            return new Response("Invalid");
+        $session = new Session();
+        if(empty($user) || $keysecure != $session->get('ks')){
+            return $this->redirect($this->generateUrl('calendar_homepage'));
         }
 
         $friend_list = $user->getFriends()->toArray();

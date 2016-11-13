@@ -7,6 +7,9 @@ use CommonBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
+use CommonBundle\Tools\Functions as Functions;
+
 
 class FormController extends Controller
 {
@@ -19,8 +22,10 @@ class FormController extends Controller
             $email = $user['email'];
             $password = $user['password'];
             $repository = $this->getDoctrine()->getManager()->getRepository('CommonBundle:User');
-            $ret = $repository->findBy(array('email' => $email, 'password' => $password));
+            $ret = $repository->findBy(array('email' => $email, 'password' => Functions::createPass($password)));
             if (count($ret) == 1) {
+                $session = new Session();
+                $session->set('ks', $ret[0]->getKeySecure());
                 return $this->redirect($this->generateUrl('calendar_display', array('keysecure' => $ret[0]->getKeySecure())));
             } else {
                 return $this->render('CalendarBundle:Form:login.html.twig', array(
@@ -40,21 +45,13 @@ class FormController extends Controller
         $form = $this->createForm(new UserType(), $user);
         if ($form->handleRequest($request)->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $timestamp = 1234567890;
-            $date_time = \Date('dmY', $timestamp);
-            $key = $user->getEmail() . $date_time;
-            $hash = hash('sha256', $key);
-            $user->setKeySecure($hash);
+            $pass = $user->getPassword();
+            $email = $user->getEmail();
+            $user->setKeySecure(Functions::createKeySecure($email));
+            $user->setPassword(Functions::createPass($pass));
             $em->persist($user);
             $em->flush();
-            //return $this->redirect('CalendarBundle:Form:login.html.twig');
-
             return $this->redirect($this->generateUrl('calendar_homepage'));
-
-
-
-
-
         } else {
             return $this->render('CalendarBundle:Form:register.html.twig', array(
                 'form' => $form->createView(),

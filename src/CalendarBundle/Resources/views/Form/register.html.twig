@@ -1,7 +1,7 @@
 {% extends 'CalendarBundle::layout.html.twig' %}
 {% block body %}
     {#{ form(form) }#}
-    <form name="user" method="post">
+    <form name="user" method="post" autocomplete="off">
         <div class="form-group">
             {{ form_row(form.name) }}
         </div>

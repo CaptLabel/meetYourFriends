@@ -19,7 +19,7 @@ function strDateClean(str){
 
 function getDateObject(str){
     var date_r = str.replace(' 00:00:00.000000', '');
-    var date_s = date_r.split("-");
+    var date_s = date_r.split('-');
     var obj;
     if(date_s.length == 3){
         obj = {
@@ -46,6 +46,20 @@ function getFirstDayOfMonth(this_date){
     return new Date(this_date.getFullYear(), this_date.getMonth(), 1);
 }
 
+function convertDate(inputFormat, format) {
+    function pad(s) { return (s < 10) ? '0' + s : s; }
+    var ret;
+    var d = inputFormat;
+    switch (format){
+        case "Y-m-d":
+            ret = [d.getFullYear(), pad(d.getMonth()+1), pad(d.getDate())].join('-');
+            break;
+        default:
+            ret = [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
+            break;
+    }
+    return ret;
+}
 
 Date.prototype.addDays = function(days)
 {
