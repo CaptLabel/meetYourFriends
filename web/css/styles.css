@@ -82,3 +82,32 @@
 #match_list{
     width: 100%;
 }
+
+.block_error{
+    color: red;
+}
+
+.avatar-cell img{
+    height: 50px;
+    width: 50px;
+    display: block;
+    border-radius: 50%;
+}
+
+#table_search img{
+    border-radius: 50%;
+    height: 70px;
+    width: 70px;
+}
+
+#table_search td{
+    vertical-align: middle;
+}
+
+#table_search td:first-child{
+    width: 120px;
+}
+
+#table_search td:last-child {
+    font-size: 25px;
+}

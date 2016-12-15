@@ -23,11 +23,12 @@ function displaySearch(res_search){
     table_search.find('tr').remove();
     var html = "";
     if(res_search.length > 0){
-        html += "<tr><th>Name</th><th colspan='2'>Email</th></tr>";
+        html += "<tr><th colspan='2'>Name</th></tr>";
         for(var key in res_search){
             html += "<tr>";
+            //TODO URL EN DUR !!!
+            html += "<td><img src='/meetYourFriends/web/images/avatar/"+res_search[key].key_avatar+".jpg'/></td>";
             html += "<td>"+res_search[key].name+"</td>";
-            html += "<td>"+res_search[key].email+"</td>";
             html += '<td onclick="add_friend(this, '+res_search[key].id+')"><span class="c-pointer">+<i class="glyphicon glyphicon-user"></i></span></td>';
             html += "</tr>";
         }

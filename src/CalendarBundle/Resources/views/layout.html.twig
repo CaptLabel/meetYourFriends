@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Meet Your Friends</title>
-    <link href="{{ asset('css/lib/bootstrap.min.css') }}" type="text/css" rel="stylesheet"/>
-    <link href="{{ asset('css/lib/bootstrap-theme.min.css') }}" type="text/css" rel="stylesheet"/>
+    <link href="{{ asset('css/lib/bootstrap/bootstrap.min.css') }}" type="text/css" rel="stylesheet"/>
+    <link href="{{ asset('css/lib/bootstrap/bootstrap-theme.min.css') }}" type="text/css" rel="stylesheet"/>
     <link href="{{ asset('css/styles.css') }}" type="text/css" rel="stylesheet"/>
     <link href="{{ asset('css/lib/jquery-ui.min.css') }}" type="text/css" rel="stylesheet"/>
 </head>
@@ -18,7 +18,8 @@
                     <i class="glyphicon glyphicon-menu-hamburger"></i>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="{{ path('calendar_homepage') }}">Deconnexion</a></li>
+                    <li><a href="{{ path('calendar_logout') }}">My account</a></li>
+                    <li><a href="{{ path('calendar_logout') }}">Logout</a></li>
                 </ul>
             </li>
         </ul>

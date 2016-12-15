@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="CommonBundle\Repository\UserRepository")
+ *
  */
 class User
 {
@@ -45,9 +46,16 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="key_secure", type="string", length=255)
+     * @ORM\Column(name="key_secure", type="string", length=255, unique=true)
      */
     public $key_secure;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="key_avatar", type="string", length=255, unique=true)
+     */
+    public $key_avatar;
 
     /**
      * @ORM\ManyToMany(targetEntity="CommonBundle\Entity\User")
@@ -177,5 +185,21 @@ class User
     {
         // Ici on utilise une méthode de l'ArrayCollection, pour supprimer la catégorie en argument
         $this->friends->removeElement($user);
+    }
+
+    /**
+     * @return string
+     */
+    public function getKeyAvatar()
+    {
+        return $this->key_avatar;
+    }
+
+    /**
+     * @param string $key_avatar
+     */
+    public function setKeyAvatar($key_avatar)
+    {
+        $this->key_avatar = $key_avatar;
     }
 }

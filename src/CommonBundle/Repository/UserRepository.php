@@ -16,9 +16,9 @@ class UserRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('user');
         $qb
-            ->addSelect('user.email')
             ->addSelect('user.name')
             ->addSelect('user.id')
+            ->addSelect('user.key_avatar')
             ->where('user.email LIKE :val')
             ->orWhere('user.name LIKE :val')
             ->andWhere('user.key_secure != :keysecure')

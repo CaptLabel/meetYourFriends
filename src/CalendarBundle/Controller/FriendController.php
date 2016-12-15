@@ -4,6 +4,7 @@ namespace CalendarBundle\Controller;
 
 use CommonBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -57,9 +58,15 @@ class FriendController extends Controller
         }
         $em = $this->getDoctrine()->getManager();
         $user->addFriend($new_friend);
-        $em->persist($user);
-        $em->flush();
-        $ret['status'] = "OK";
+        try{
+            $em->persist($user);
+            $em->flush();
+            $ret['status'] = "OK";
+        }catch (\Exception $e){
+            $ret['status'] = "KO";
+            $ret['message'] = "Duplicate key";
+        }
+
         $response = new Response(json_encode($ret));
         $response->headers->set('Content-Type', 'application/json');
         return $response;

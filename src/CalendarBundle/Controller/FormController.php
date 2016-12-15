@@ -15,6 +15,8 @@ class FormController extends Controller
 {
     public function indexAction(Request $request)
     {
+        $session = new Session();
+        //var_dump($session->get('ks'));
         $user = new User();
         $form = $this->createForm(new UserType(), $user);
         if ($request->isMethod('POST')) {
@@ -49,6 +51,7 @@ class FormController extends Controller
             $email = $user->getEmail();
             $user->setKeySecure(Functions::createKeySecure($email));
             $user->setPassword(Functions::createPass($pass));
+            $user->setKeyAvatar(Functions::createKeyAvatar($email));
             $em->persist($user);
             $em->flush();
             return $this->redirect($this->generateUrl('calendar_homepage'));

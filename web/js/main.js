@@ -75,7 +75,7 @@ function isThatDay(this_date, current_day, slt_day) {
     }
     return ret;
 }
-
+l
 function getWhiteSpace(get_day){
     var ret;
     if(get_day == 0){
@@ -206,8 +206,8 @@ function fillBlockSchedule(item){
                var it = item.match[key];
                html += "<tr class='match-line'>";
                html += "<td colspan='3' class='match-name'>- "+it.name+"</td>";
-               html += "<td colspan='1'>"+it.date_arrival+"</td>";
-               html += "<td colspan='1'>"+it.date_departure+"</td>";
+               html += "<td colspan='1'>"+strDateClean(it.date_arrival)+"</td>";
+               html += "<td colspan='1'>"+strDateClean(it.date_departure)+"</td>";
                html += "</tr>";
            }
         }
@@ -227,8 +227,8 @@ function fillMatchList(list){
         if(list.hasOwnProperty(key)){
             html += "<tr>";
             html += "<td>"+list[key].name+"</td>";
-            html += "<td>"+list[key].date_arrival+"</td>";
-            html += "<td>"+list[key].date_departure+"</td>";
+            html += "<td>"+strDateClean(list[key].date_arrival)+"</td>";
+            html += "<td>"+strDateClean(list[key].date_departure)+"</td>";
             html += "</tr>";
         }
     }
@@ -242,17 +242,6 @@ function fromPickerToSelect(date, target){
     });
 }
 
-function initMinDate(){
-
-
-
-    //console.log(strToDate());
-
-    console.log($('#stay_dateArrival_picker').val());
-
-    return init_date;
-}
-
 $(document).ready(function(){
     $('.ui_change_month').click(function(){
         var ui_action = $(this).attr('ui-action');
@@ -264,6 +253,7 @@ $(document).ready(function(){
         modifyStay($(this).attr('ui-id'));
     });
     $("body").delegate('[data-target="#stay_popup"]', "click", function(){
+        stay_popup.find('.block_error').html('').hide();
         var this_id = $(this).attr('ui-stay-id');
         if(typeof this_id == "undefined"){
             $('.ui_add_evt').show();

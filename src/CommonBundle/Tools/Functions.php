@@ -17,4 +17,10 @@ class Functions
         $hash = hash('sha256', $key);
         return $hash;
     }
+    public function createKeyAvatar($email){
+        $grain = 'av12at34ar';
+        $sel = 'av46at56ar';
+        $sha1 = sha1($grain.$email.$sel);
+        return $sha1;
+    }
 }

@@ -12,14 +12,14 @@
                 </tr>
             {% else %}
                 <tr>
-                    <th>Name</th>
-                    <th colspan="2">Email</th>
+                    <th></th>
+                    <th colspan="2">Name</th>
                 </tr>
             {% endif %}
             {% for item in friend_list %}
                 <tr>
+                    <td class="avatar-cell"><img src="{{ asset('images/avatar/75bd8759b49eceb4dc883bd6e2c1972f728eb9f8.jpg') }}"/></td>
                     <td>{{ item.name }}</td>
-                    <td>{{ item.email }}</td>
                     <td><i class='glyphicon glyphicon-trash c-pointer' onclick="delete_friend(this, {{ item.id }})"></i></td>
                 </tr>
             {% endfor %}

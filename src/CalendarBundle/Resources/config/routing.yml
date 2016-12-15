@@ -10,6 +10,10 @@ calendar_display:
     path:     /display/{keysecure}
     defaults: { _controller: CalendarBundle:Default:index }
 
+calendar_logout:
+    path:     /logout/
+    defaults: { _controller: CalendarBundle:Default:logout }
+
 calendar_friend_index:
     path:     /friend/{keysecure}
     defaults: { _controller: CalendarBundle:Friend:index }

@@ -60,8 +60,8 @@ class DefaultController extends Controller
             $city = $_POST['city'];
             /** @var StayRepository $repository_stay */
             $repository_stay = $this->getDoctrine()->getManager()->getRepository('CommonBundle:Stay');
-            $test_double = $repository_stay->findDoubleStay($date_arr, $date_dep, $keysecure);
-            if($id != "add" || count($test_double) == 0){
+            $test_double = $repository_stay->findDoubleStay($date_arr, $date_dep, $keysecure, $id);
+            if(count($test_double) == 0){
                 $stay = new Stay();
                 if(!empty($id) && $id != "add"){
                     $stay = $repository_stay->myFindStayById($keysecure, $id);
@@ -79,7 +79,7 @@ class DefaultController extends Controller
                 $ret['status'] = "OK";
                 $ret['message'] = "";
             }else{
-                $ret['message'] = "you can't be in two places at the same time";
+                $ret['message'] = "You can't be in two places at the same time";
             }
         }
         $response = new Response(json_encode($ret));
@@ -101,5 +101,12 @@ class DefaultController extends Controller
         $response = new Response(json_encode($ret));
         $response->headers->set('Content-Type', 'application/json');
         return $response;
+    }
+    public function logoutAction(){
+        //TODO pas de bouton deco sur la HomePage
+        //TODO le back restaure la session après deco
+        $session = new Session();
+        $session->clear();
+        return $this->redirect($this->generateUrl('calendar_homepage'));
     }
 }

@@ -42,15 +42,17 @@ class StayRepository extends EntityRepository
             ->getQuery()
             ->getSingleResult();
     }
-    public function findDoubleStay($date_arr, $date_dep, $keysecure){
+    public function findDoubleStay($date_arr, $date_dep, $keysecure, $id){
         $qb = $this->createQueryBuilder('a');
         $qb
             ->leftJoin('a.user', 'user')
             ->addSelect('user')
             ->where('user.key_secure = :keysecure')
+            ->andWhere('a.id != :id')
             ->andWhere('(a.dateDeparture BETWEEN :date_arr and :date_dep) OR (a.dateArrival BETWEEN :date_arr and :date_dep)')
             ->setParameter('keysecure', $keysecure)
             ->setParameter('date_arr', $date_arr)
+            ->setParameter('id', $id)
             ->setParameter('date_dep', $date_dep);
         return $qb
             ->getQuery()
