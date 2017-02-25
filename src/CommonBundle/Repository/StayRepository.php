@@ -61,7 +61,7 @@ class StayRepository extends EntityRepository
     public function findMatch($date_arr, $date_dep, $city, $keysecure)
     {
         $connection = $this->_em->getConnection();
-        $sql = "SELECT s.date_arrival, s.date_departure, s.city, um.name  FROM `stay` s, `user` u, `user_user` uu, `user` um WHERE u.key_secure = ? AND u.id = uu.user_source AND uu.user_target = s.user_id AND u.id != s.user_id AND s.city = ? AND ((s.date_arrival BETWEEN ? AND ?) OR (s.date_departure BETWEEN ? AND ?)) AND s.user_id = um.id";
+        $sql = "SELECT s.date_arrival, s.date_departure, s.city, um.name, um.key_avatar  FROM `stay` s, `user` u, `user_user` uu, `user` um WHERE u.key_secure = ? AND u.id = uu.user_source AND uu.user_target = s.user_id AND u.id != s.user_id AND s.city = ? AND ((s.date_arrival BETWEEN ? AND ?) OR (s.date_departure BETWEEN ? AND ?)) AND s.user_id = um.id";
         $statement = $connection->prepare($sql);
         $statement->bindValue(1, $keysecure);
         $statement->bindValue(2, $city);

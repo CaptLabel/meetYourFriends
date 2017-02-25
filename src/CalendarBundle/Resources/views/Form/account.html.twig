@@ -1,0 +1,25 @@
+{% extends 'CalendarBundle::layout.html.twig' %}
+{% block body %}
+COucouc ici accouhbnt
+
+
+    <input id="fileupload" type="file" name="files[]" data-url="server/php/" multiple>
+
+{% endblock %}
+{% block footer %}
+    <script type="application/javascript" src="{{ asset('js/upload/jquery.ui.widget.js') }}"></script>
+    <script type="application/javascript" src="{{ asset('js/upload/jquery.iframe-transport.js') }}"></script>
+    <script type="application/javascript" src="{{ asset('js/upload/jquery.fileupload.js') }}"></script>
+    <script>
+        $(function () {
+            $('#fileupload').fileupload({
+                dataType: 'json',
+                done: function (e, data) {
+                    $.each(data.result.files, function (index, file) {
+                        $('<p/>').text(file.name).appendTo(document.body);
+                    });
+                }
+            });
+        });
+    </script>
+{% endblock %}

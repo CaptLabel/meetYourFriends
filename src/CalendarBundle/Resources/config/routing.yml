@@ -45,3 +45,11 @@ calendar_modify_stay:
 calendar_remove_stay:
     path:     /removestay/{keysecure}/{id}
     defaults: { _controller: CalendarBundle:Default:removeStay }
+
+calendar_my_account:
+    path:     /myaccount/
+    defaults: { _controller: CalendarBundle:Form:account }
+
+calendar_my_account_serveur_php:
+    path:     /myaccount/server/php/
+    defaults: { _controller: CalendarBundle:Form:serverPhp }

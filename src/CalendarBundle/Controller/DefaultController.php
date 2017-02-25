@@ -61,7 +61,7 @@ class DefaultController extends Controller
             /** @var StayRepository $repository_stay */
             $repository_stay = $this->getDoctrine()->getManager()->getRepository('CommonBundle:Stay');
             $test_double = $repository_stay->findDoubleStay($date_arr, $date_dep, $keysecure, $id);
-            if(count($test_double) == 0){
+            if(count($test_double) == 0 || $id != "add"){
                 $stay = new Stay();
                 if(!empty($id) && $id != "add"){
                     $stay = $repository_stay->myFindStayById($keysecure, $id);

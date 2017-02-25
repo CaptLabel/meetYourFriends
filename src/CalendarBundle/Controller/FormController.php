@@ -61,4 +61,16 @@ class FormController extends Controller
             ));
         }
     }
+
+    public function accountAction()
+    {
+        return $this->render('CalendarBundle:Form:account.html.twig');
+    }
+
+    public function serverPhpAction()
+    {
+        error_reporting(E_ALL | E_STRICT);
+        require('UploadHandler.php');
+        $upload_handler = new UploadHandler();
+    }
 }

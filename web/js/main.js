@@ -75,7 +75,7 @@ function isThatDay(this_date, current_day, slt_day) {
     }
     return ret;
 }
-l
+
 function getWhiteSpace(get_day){
     var ret;
     if(get_day == 0){
@@ -194,20 +194,20 @@ function fillBlockSchedule(item){
     var ifMatch = typeof item.match != "undefined";
     var html = "";
     html += "<tr"+((ifMatch)?" class='match'":"")+">";
-    html += "<td>"+item.city+"</td>";
-    html += "<td>"+strDateClean(item.dateArrival.date)+"</td>";
-    html += "<td>"+strDateClean(item.dateDeparture.date)+"</td>";
-    html += "<td class='c-pointer td-center' data-toggle='modal' data-target='#stay_popup' ui-stay-id="+item.id+"><i class='glyphicon glyphicon-pencil'></i></td>";
-    html += "<td class='c-pointer td-center' data-toggle='modal' data-target='#delete_popup' onclick='putIdPD("+item.id+")'><i class='glyphicon glyphicon-trash'></i></td>";
+        html += "<td>"+item.city+"</td>";
+        html += "<td>"+strDateClean(item.dateArrival.date)+"</td>";
+        html += "<td>"+strDateClean(item.dateDeparture.date)+"</td>";
+        html += "<td class='c-pointer td-center' data-toggle='modal' data-target='#stay_popup' ui-stay-id="+item.id+"><i class='glyphicon glyphicon-pencil'></i></td>";
+        html += "<td class='c-pointer td-center' data-toggle='modal' data-target='#delete_popup' onclick='putIdPD("+item.id+")'><i class='glyphicon glyphicon-trash'></i></td>";
     html += "</tr>";
     if(ifMatch){
         for(var key in item.match){
            if(item.match.hasOwnProperty(key)){
                var it = item.match[key];
                html += "<tr class='match-line'>";
-               html += "<td colspan='3' class='match-name'>- "+it.name+"</td>";
-               html += "<td colspan='1'>"+strDateClean(it.date_arrival)+"</td>";
-               html += "<td colspan='1'>"+strDateClean(it.date_departure)+"</td>";
+                html += "<td colspan='3' class='match-name'>- "+it.name+"</td>";
+                html += "<td colspan='1'>"+strDateClean(it.date_arrival)+"</td>";
+                html += "<td colspan='1'>"+strDateClean(it.date_departure)+"</td>";
                html += "</tr>";
            }
         }
@@ -226,9 +226,15 @@ function fillMatchList(list){
     for(var key in list){
         if(list.hasOwnProperty(key)){
             html += "<tr>";
-            html += "<td>"+list[key].name+"</td>";
-            html += "<td>"+strDateClean(list[key].date_arrival)+"</td>";
-            html += "<td>"+strDateClean(list[key].date_departure)+"</td>";
+            //TODO URL EN DUR !!!
+                html += "<td colspan='2' align='center'><img src='/meetYourFriends/web/images/avatar/"+list[key].key_avatar+".jpg'/></td>";
+            html += "</tr>";
+            html += "<tr>";
+                html += "<td colspan='2' align='center'>"+list[key].name+"</td>";
+            html += "</tr>";
+            html += "<tr>";
+                html += "<td>"+strDateClean(list[key].date_arrival)+"</td>";
+                html += "<td>"+strDateClean(list[key].date_departure)+"</td>";
             html += "</tr>";
         }
     }
@@ -265,7 +271,7 @@ $(document).ready(function(){
             $('.selectDate').find('select').each(function(){
                 var key = $(this).attr('id').split('_');
                 var obj_date = getDateObject(convertDate(current_date, "Y-m-d"));
-                $(this).val(obj_date[key[2]]);
+                $(this).val(parseFloat(obj_date[key[2]]));
             });
         }else{
             $('.ui_add_evt').hide();
@@ -287,7 +293,7 @@ $(document).ready(function(){
                             (($(this).attr('id').indexOf('Arrival') != '-1')?dS = date_arr:dS = date_dep);
                             var key = $(this).attr('id').split('_');
                             var obj_date = getDateObject(dS);
-                            $(this).val(obj_date[key[2]]);
+                            $(this).val(parseFloat(obj_date[key[2]]));
                         });
                     }
                 }
@@ -297,7 +303,6 @@ $(document).ready(function(){
     $('.delete_stay').click(function(){
         removeStay($(this).attr('ui-id-d'));
     });
-
     $(".picker-init").datepicker({
         dateFormat: 'dd/mm/yy',
         minDate : init_date,
